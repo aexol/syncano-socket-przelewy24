@@ -1,0 +1,102 @@
+name: przelewy24
+description: >-
+  This package makes it easy to use przelewy24.pl payment provider as a syncano
+  socket.
+version: 0.0.2
+config:
+  MERCHANT_ID:
+    description: Merchant id
+    example: 12356
+    required: true
+  TEST:
+    description: test mode type true if you want testing on and false if off true|false
+    example: false
+    required: true
+  CRC:
+    description: Key in user data on przelewy24.pl
+    example: 1212je181u781he1
+    required: true
+  CURRENCY_CODE:
+    description: currency
+    example: PLN
+    required: true
+classes:
+  transaction:
+    - name: externalId
+      type: string
+      filter_index: true
+    - name: status
+      type: string
+      filter_index: true
+    - name: uuid
+      type: string
+      filter_index: true
+    - name: amount
+      type: integer
+      filter_index: true
+endpoints:
+  call:
+    description: Test call to przelewy24 base
+    file: call.js
+  notify:
+    description: Notification from przelewy serwer
+    file: notify.js
+  payment:
+    description: Pay for goods
+    file: payment.js
+    parameters:
+      externalId:
+        type: string
+        description: >-
+          externalId of your transaction. When transaction is finalized - event
+          is emmited 'przelewy24_transaction_paid' with externalId param
+        example: externalId
+      email:
+        type: string
+        description: email
+        example: email
+      description:
+        type: string
+        description: description
+        example: description
+      amount:
+        type: integer
+        description: amount
+        example: 33
+      products:
+        type: array
+        description: array of products
+        example: |
+          [
+            {
+              "name": "cola",
+              "description": "tasty healthy soda",
+              "quantity": 4,
+              "price": 199,
+              "number": 123
+            }
+          ]
+      name:
+        type: string
+        description: name
+        example: name
+      address:
+        type: string
+        description: address
+        example: address
+      postCode:
+        type: string
+        description: postCode
+        example: postCode
+      city:
+        type: string
+        description: city
+        example: city
+      returnUrl:
+        type: string
+        description: returnUrl
+        example: returnUrl
+      statusUrl:
+        type: string
+        description: statusUrl
+        example: statusUrl
