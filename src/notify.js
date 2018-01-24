@@ -1,8 +1,8 @@
-import Server from 'syncano-server'
+import Server from '@syncano/core'
 import {call, url} from './utils'
 import queryString from 'query-string'
 export default async ctx => {
-  const {data, response, event} = Server(ctx)
+  const {data, response, event} = new Server(ctx)
   try {
     const {
       p24_merchant_id,

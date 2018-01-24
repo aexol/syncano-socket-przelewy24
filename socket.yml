@@ -3,6 +3,7 @@ description: >-
   This package makes it easy to use przelewy24.pl payment provider as a syncano
   socket.
 version: 0.0.2
+runtime: nodejs_v8
 config:
   MERCHANT_ID:
     description: Merchant id
@@ -100,3 +101,10 @@ endpoints:
         type: string
         description: statusUrl
         example: statusUrl
+events:
+  przelewy24_transaction_paid:
+    description: Sent when transaction happens
+    parameters:
+      externalId:
+      type: string
+      

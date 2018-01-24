@@ -1,11 +1,11 @@
-import Server from 'syncano-server'
+import Server from '@syncano/core'
 import {url, sign, call} from './utils'
 import uuid from 'uuid/v4'
 import queryString from 'query-string';
 
 export default async ctx => {
   try {
-    const {response, data} = Server(ctx)
+    const {response, data} = new Server(ctx)
     let {
       MERCHANT_ID,
       CRC,
@@ -74,7 +74,10 @@ export default async ctx => {
       data: body
     })).text()
     const convertedResponse = queryString.parse(resp)
-    return response.json({...convertedResponse,url:`${url(ctx)}trnRequest/${convertedResponse.token}`})
+    return response.json({
+      ...convertedResponse,
+      url:`${url(ctx)}trnRequest/${convertedResponse.token}`
+    })
   } catch ({message}) {
     throw new Error(message)
   }

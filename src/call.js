@@ -1,10 +1,10 @@
-import Server from 'syncano-server'
+import Server from '@syncano/core'
 import fetch from 'axios'
 import {url, sign, call} from './utils'
 import FormData from 'form-data'
 export default async ctx => {
   try {
-    const {response} = Server(ctx)
+    const {response} = new Server(ctx)
     let {MERCHANT_ID, CRC, TEST = 'false'} = ctx.config
     const fd = new FormData()
     const body = {
